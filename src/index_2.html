@@ -32,7 +32,7 @@
                 <section class="filters">
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
                         <div>
-                            <h2>Tamanho</h2>
+                            <h2 class="h2-tamanho">Tamanho</h2>
                         </div>
                         <div>
                             <span>-</span>
@@ -56,7 +56,7 @@
                 <section class="filters">
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
                         <div>
-                            <h2>Tipo do Produto</h2>
+                            <h2 class="h2-tamanho">Tipo do Produto</h2>
                         </div>
                         <div>
                             <span>-</span>
@@ -71,11 +71,11 @@
                     <div>
                         <div>
                             <ul class="list-type list-type-id">
-                                <li><button class="botao-tamanho button-type"
+                                <li class="li-type"><button class="botao-tamanho button-type"
                                         onclick="toggleChecked(this)"></button>Blusa</li>
-                                <li><button class="botao-tamanho button-type"
+                                <li class="li-type"><button class="botao-tamanho button-type"
                                         onclick="toggleChecked(this)"></button>Calça</li>
-                                <li><button class="botao-tamanho button-type"
+                                <li class="li-type"><button class="botao-tamanho button-type"
                                         onclick="toggleChecked(this)"></button>Camisa</li>
                             </ul>
                         </div>
@@ -85,7 +85,7 @@
                 <section class="filters">
                     <div style="display: flex; flex-direction: row; justify-content: space-between;">
                         <div>
-                            <h2>Preço</h2>
+                            <h2 class="h2-tamanho">Preço</h2>
                         </div>
                         <div>
                             <span>-</span>
@@ -96,29 +96,25 @@
                             <!-- adicionar um price range (to do) -->
                         </div>
                     </div>
-                    <div>
-                        <div>
-                            <div style="display: flex; flex-direction: row;">
-                                <div style="margin-right: -40px;">
-                                    <p>Mínimo:</p>
-                                    <input placeholder="0" type="number" style="width: 30%;">
-                                </div>
-                                <div>
-                                    <p>Máximo:</p>
-                                    <input placeholder="10000" type="number" style="width: 30%;">
-                                </div>
-                            </div>
+                    <div class="range-box">
+                        <div class="range-box-info">
+                            <p>Mínimo:</p>
+                            <input placeholder="0" type="number">
+                        </div>
+                        <div class="range-box-info">
+                            <p>Máximo:</p>
+                            <input placeholder="10000" type="number">
                         </div>
                     </div>
                 </section>
             </section>
         </div>
-        
+
         <div>
-            
+            <!-- roupas (to do) -->
         </div>
     </main>
     <script src="script.js"></script>
 </body>
 
-</html>
+</html> 
