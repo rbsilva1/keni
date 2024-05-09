@@ -10,34 +10,84 @@ function toggleMenu(nomeDaDiv) {
     }
 }
 
+const roupas = [
+    {
+        titulo: 'Camisa Masculino',
+        categoria: 'Masculino',
+        imagem: 'Saab.png',
+        tamanho: 'P',
+    },
+    {
+        titulo: 'Camisa Masculino',
+        categoria: 'Masculino',
+        imagem: 'Saab.png',
+        tamanho: 'M',
+    },
+    {
+        titulo: 'Camisa Masculino',
+        categoria: 'Masculino',
+        imagem: 'Saab.png',
+        tamanho: 'G',
+    },
+    {
+        titulo: 'Blusa Feminina',
+        categoria: 'Feminino',
+        imagem: 'Saab.png',
+        tamanho: 'M',
+    },
+    {
+        titulo: 'Blusa Feminina',
+        categoria: 'Feminino',
+        imagem: 'Saab.png',
+        tamanho: 'G',
+    },
+    {
+        titulo: 'Camisa Infantil',
+        categoria: 'Infantil',
+        imagem: 'Saab.png',
+        tamanho: 'M',
+    },
+    {
+        titulo: 'Camisa Infantil',
+        categoria: 'Infantil',
+        imagem: 'Saab.png',
+        tamanho: 'G',
+    },
+    {
+        titulo: 'Camisa Esportiva',
+        categoria: 'Esporte',
+        imagem: 'Saab.png',
+        tamanho: 'M',
+    },
+    {
+        titulo: 'Camisa Esportiva',
+        categoria: 'Esporte',
+        imagem: 'Saab.png',
+        tamanho: 'G',
+    },
+]
+
+function filtrarRoupa(tamanho) {
+    document.querySelector('.roupas').innerHTML = '';
+    roupas.filter((roupa, index) => {
+        if (roupa.tamanho === tamanho) {
+            const div = document.createElement('div').classList.add('roupa');
+            document.createElement('img').src = 'caminho-da-sua-imagem.jpg';
+            document.querySelector('.roupas').innerHTML += `titulo: ${roupa.titulo} <br> categoria: ${roupa.categoria}<br>`;
+        }
+    })
+}
+
 // arrays
 // const cars = ["Saab", "Volvo", "BMW"];
 // const imagens = ["Saab.png", "Volvo.png", "BMW.png"];
 // const descricao = ["Saab.txt", "Volvo.txt", "BMW.txt"];
-
 
 // cars.filter((car, index) => {
 //     if (car === "Saab") {
 //         document.querySelector('.roupas').innerHTML = `car: ${car} <br> image: ${imagens[index]} <br> descricao: ${descricao[index]}`;
 //     }
 // })
-
-// const roupas = [
-//     {
-//         titulo: 'Camisa Polo',
-//         categoria: 'Masculino',
-//         imagem: 'Saab.png',
-//         tamanho: 'M',
-//     },
-//     {
-//         titulo: 'Camisa Polo',
-//         categoria: 'Feminino',
-//     },
-//     {
-//         titulo: 'Calça Polo',
-//         categoria: 'Masculino',
-//     },
-// ]
 
 // roupas.filter((roupa, index) => {
 //     if (roupa.categoria === "Masculino") {
@@ -47,26 +97,25 @@ function toggleMenu(nomeDaDiv) {
 
 
 // // Loop para criar as divs For
-// for (let i = 0; i < numDivs; i++) {
-//     const div = document.querySelector('.roupas');
+for (let i = 0; i < roupas.length; i++) {
+    const div = document.querySelector('.roupas');
 
-//     // Conteúdo da div
-//     const image = document.createElement('img');
-//     image.src = 'caminho-da-sua-imagem.jpg';
-//     image.alt = 'Polo';
-//     image.className = 'my-image';
+    // Conteúdo da div
+    const image = document.createElement('img');
+    image.src = 'img/1-svg.svg';
+    image.alt = 'Polo';
+    image.className = 'my-image';
 
-//     const title = document.createElement('h2');
-//     title.className = 'my-title';
-//     title.textContent = 'Título da Div';
+    const title = document.createElement('h2');
+    title.className = title[i];
 
-//     const link = document.createElement('a');
-//     link.href = 'https://seulink.com';
-//     link.className = 'my-button';
-//     link.textContent = 'Clique Aqui';
+    // const link = document.createElement('a');
+    // link.href = 'https://seulink.com';
+    // link.className = 'my-button';
+    // link.textContent = 'Clique Aqui';
 
-//     // Adiciona os elementos à div
-//     div.appendChild(image);
-//     div.appendChild(title);
-//     div.appendChild(link);
-// }
+    // Adiciona os elementos à div
+    div.appendChild(image);
+    div.appendChild(title);
+    // div.appendChild(link);
+}
