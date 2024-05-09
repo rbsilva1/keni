@@ -10,60 +10,69 @@ function toggleMenu(nomeDaDiv) {
     }
 }
 
-const roupas = [
+const roupas = [ 
     {
-        titulo: 'Camisa Masculino',
+        titulo: 'Camisa Masculino P',
         categoria: 'Masculino',
         imagem: 'Saab.png',
         tamanho: 'P',
+        preco: 'R$99,99',
     },
     {
-        titulo: 'Camisa Masculino',
+        titulo: 'Camisa Masculino M',
         categoria: 'Masculino',
         imagem: 'Saab.png',
         tamanho: 'M',
+        preco: 'R$99,99',
     },
     {
-        titulo: 'Camisa Masculino',
+        titulo: 'Camisa Masculino G',
         categoria: 'Masculino',
         imagem: 'Saab.png',
         tamanho: 'G',
+        preco: 'R$99,99',
     },
     {
-        titulo: 'Blusa Feminina',
+        titulo: 'Blusa Feminina M',
         categoria: 'Feminino',
         imagem: 'Saab.png',
         tamanho: 'M',
+        preco: 'R$99,99',
     },
     {
-        titulo: 'Blusa Feminina',
+        titulo: 'Blusa Feminina G',
         categoria: 'Feminino',
         imagem: 'Saab.png',
         tamanho: 'G',
+        preco: 'R$99,99',
     },
     {
-        titulo: 'Camisa Infantil',
+        titulo: 'Camisa Infantil M',
         categoria: 'Infantil',
         imagem: 'Saab.png',
         tamanho: 'M',
+        preco: 'R$99,99',
     },
     {
-        titulo: 'Camisa Infantil',
+        titulo: 'Camisa Infantil G',
         categoria: 'Infantil',
         imagem: 'Saab.png',
         tamanho: 'G',
+        preco: 'R$99,99',
     },
     {
-        titulo: 'Camisa Esportiva',
+        titulo: 'Camisa Esportiva (M)',
         categoria: 'Esporte',
         imagem: 'Saab.png',
         tamanho: 'M',
+        preco: 'R$99,99',
     },
     {
-        titulo: 'Camisa Esportiva',
+        titulo: 'Camisa Esportiva G',
         categoria: 'Esporte',
         imagem: 'Saab.png',
         tamanho: 'G',
+        preco: 'R$99,99',
     },
 ]
 
@@ -100,6 +109,9 @@ function filtrarRoupa(tamanho) {
 for (let i = 0; i < roupas.length; i++) {
     const div = document.querySelector('.roupas');
 
+    const roupa = document.createElement('div');
+    roupa.className = 'roupa-div'
+
     // Conteúdo da div
     const image = document.createElement('img');
     image.src = 'img/1-svg.svg';
@@ -107,15 +119,33 @@ for (let i = 0; i < roupas.length; i++) {
     image.className = 'my-image';
 
     const title = document.createElement('h2');
-    title.className = title[i];
+    title.className = 'texto-roupas';
+    title.innerHTML = roupas[i].titulo.toUpperCase();
+    
 
-    // const link = document.createElement('a');
-    // link.href = 'https://seulink.com';
-    // link.className = 'my-button';
-    // link.textContent = 'Clique Aqui';
+    const categoria = document.createElement('span');
+    categoria.className = 'hidden-roupa'
+    categoria.innerHTML = roupas[i].categoria;
+
+    const tamanho = document.createElement('span');
+    tamanho.className = 'hidden-roupa';
+    tamanho.innerHTML = roupas[i].tamanho;
+    
+    const preco = document.createElement('h2');
+    preco.className = 'texto-roupas';
+    preco.innerHTML = roupas[i].preco;
 
     // Adiciona os elementos à div
-    div.appendChild(image);
-    div.appendChild(title);
-    // div.appendChild(link);
+    roupa.appendChild(image);
+    roupa.appendChild(title);
+    roupa.appendChild(categoria);
+    roupa.appendChild(tamanho);
+    roupa.appendChild(preco);
+
+    div.appendChild(roupa)
 }
+
+// titulo: 'Camisa Masculino',
+// categoria: 'Masculino',
+// imagem: 'Saab.png',
+// tamanho: 'P',

@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 span {
     display: block;
@@ -125,8 +126,21 @@ body {
     width: 15em;
 }
 
-#main {
+.texto-roupas {
+    font-size: medium;
+    font-family: "Dosis",sans-serif;
+    font-weight: normal;
+    margin: 5px;
+}
 
+.hidden-roupa {
+    display: none;
+}
+
+.roupa-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #header {
