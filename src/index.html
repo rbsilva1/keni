@@ -10,189 +10,86 @@
 </head>
 
 <body>
-    <!-- trocar pra header e nav -->
-    <div id="header-box">
-        <div style="box-sizing: border-box; justify-content: flex-start;">
-            <img id="imagem-logo" class="imagens" src="img/logo-svg.svg" alt="Polo">
+    <header id="header">
+        <div>
+            <img style="margin-left: 1em;" src="img/logo-svg.svg" alt="Polo">
         </div>
-        <div id="header-texto" style="box-sizing: border-box; justify-content: center;">
-            <h2 class="header">FEMININO</h2>
-            <h2 class="header">MASCULINO</h2>
-            <h2 class="header">INFANTIL</h2>
-            <h2 class="header">ESPORTE</h2>
+        <nav id="header-text">
+            <h2 class="text">FEMININO</h2>
+            <h2 class="text">MASCULINO</h2>
+            <h2 class="text">INFANTIL</h2>
+            <h2 class="text">ESPORTE</h2>
+        </nav>
+        <div>
+            <img style="margin-right: 1em;" src="img/lupa-svg.svg" alt="Polo">
+            <img style="margin-right: 1em;" src="img/perfil-svg.svg" alt="Polo">
         </div>
-        <div style="margin-right: 4em; box-sizing: border-box; justify-content: flex-end;">
-            <img src="img/lupa-svg.svg" class="imagens" alt="Polo">
-            <img src="img/perfil-svg.svg" class="imagens" alt="Polo">
-        </div>
-    </div>
+    </header>
 
-    <div id="page" style="display: flex; justify-content: space-between; background-color: #fff; margin-top: 2em;">
-        <div id="menu-filtro" style="margin-left: 4em;">
-            <section>
-                <section>
-                    <div>
-                        <p style="font-weight: bold;">Tamanho</p>
-                        <p style="font-weight: bold;">Buscar</p>
-                        <div style="display: flex; flex-direction: row; gap: 50px;" class="">
-                            <div class="borda-tamanho imagem-roupa">P</div>
-                            <div class="borda-tamanho imagem-roupa">M</div>
-                            <div class="borda-tamanho imagem-roupa">G</div>
+    <main style="display: flex; flex-direction: row;">
+        <div id="filter-box">
+            <section id="section-box">
+                <h1>Filtros</h1>
+                <section class="filters">
+                    <div class="cursor" onclick="toggleMenu('tamanho')">
+                        <h2 class="h2-tamanho">Tamanho</h2>
+                        <span>-</span>
+                    </div>
+                    <div id="tamanho" class="tamanhos"> 
+                        <div><button class="botao-tamanho button-type" onclick="toggleChecked(this)">P</button></div>
+                        <div><button class="botao-tamanho button-type" onclick="toggleChecked(this)">M</button></div>
+                        <div><button class="botao-tamanho button-type" onclick="toggleChecked(this)">G</button></div>
+                    </div>
+                </section>
+
+                <section class="filters">
+                    <div class="cursor" onclick="toggleMenu('tipo')">
+                        <h2 class="h2-tamanho">Tipo do Produto</h2>
+                        <span>-</span>
+                    </div>
+                    <div id="tipo">
+                        <div class="search-bar">
+                            <input type="search">
+                            <button><img src="img/lupa-preta-svg.svg" alt="Polo"></button>
                         </div>
+                        <ul class="list-type list-type-id">
+                            <li class="li-type"><button class="botao-tamanho button-type"
+                                    onclick="toggleChecked(this)"></button>Blusa</li>
+                            <li class="li-type"><button class="botao-tamanho button-type"
+                                    onclick="toggleChecked(this)"></button>Calça</li>
+                            <li class="li-type"><button class="botao-tamanho button-type"
+                                    onclick="toggleChecked(this)"></button>Camisa</li>
+                        </ul>
                     </div>
                 </section>
-                <section>
-                    <div style="margin-top: 2em;">
-                        <p style="font-weight: bold;">Tipo do Produto</p>
-                        <input type="text"
-                            style="background-image: url('img/lupa-preta-svg.svg'); background-repeat: no-repeat; padding-left: 30px; padding-bottom: 6px;">
+
+                <section class="filters" style="gap: 0;">
+                    <div class="cursor" onclick="toggleMenu('id_preco')">
+                        <h2 class="h2-tamanho">Preço</h2>
+                        <span>-</span>
                     </div>
-                </section>
-                <section>
-                    <div>
-                        <p style="font-weight: bold;">Preço</p>
-                        <div style="display: flex; flex-direction: row;">
-                            <div style="margin-right: -40px;">
+                    <div id="id_preco">
+                        <!-- adicionar um price range (to do) -->
+                        <div class="range-box">
+                            <div class="range-box-info">
                                 <p>Mínimo:</p>
-                                <input placeholder="0" type="number" style="width: 30%;">
+                                <input placeholder="0" type="number">
                             </div>
-                            <div>
+                            <div class="range-box-info">
                                 <p>Máximo:</p>
-                                <input placeholder="10000" type="number" style="width: 30%;">
+                                <input placeholder="10000" type="number">
                             </div>
                         </div>
                     </div>
                 </section>
             </section>
         </div>
-        <!-- trocar pra lista  -->
-        <div id="menu-produtos">
-            <section
-                style="display: flex; justify-content: space-between; flex-direction: row; gap: 200px; margin-bottom: 8px;">
-                <!-- Item de Produto 1 -->
-                <div class="borda-preta imagem-roupa">
-                    <img src="img/1-svg.svg" alt="">
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div style="margin: auto;">
-                            <p style="font-size: 15px;">Calça Jeans</p>
-                        </div>
-                        <div style="margin: auto; margin-bottom: 1em;">
-                            <p class="line" style="height: 0px;">R$199,99</p>
-                            <p style="height: 0px;">R$149,99</p>
-                            <p class="parcelado" style="height: 0px;">ou 4x de R$ 38</p>
-                        </div>
-                    </div>
-                    <!-- Menu que aparece ao passar o mouse -->
-                    <div class="menu-hover">
-                        <p class="detalhes">Detalhes</p>
-                        <p class="detalhes">Adicionar ao Carrinho</p>
-                    </div>
-                </div>
 
-                <!-- Item de Produto 2 -->
-                <div class="borda-preta imagem-roupa">
-                    <img src="img/2-svg.svg" alt="">
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div style="margin: auto;">
-                            <p style="font-size: 15px;">Calça Jeans</p>
-                        </div>
-                        <div style="margin: auto; margin-bottom: 1em;">
-                            <p class="line" style="height: 0px;">R$199,99</p>
-                            <p style="height: 0px;">R$149,99</p>
-                            <p class="parcelado" style="height: 0px;">ou 4x de R$ 38</p>
-                        </div>
-                    </div>
-                    <!-- Menu que aparece ao passar o mouse -->
-                    <div class="menu-hover">
-                        <p class="detalhes">Detalhes</p>
-                        <p class="detalhes">Adicionar ao Carrinho</p>
-                    </div>
-                </div>
-
-                <!-- Item de Produto 3 -->
-                <div class="borda-preta imagem-roupa">
-                    <img src="img/2-svg.svg" alt="">
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div style="margin: auto;">
-                            <p style="font-size: 15px;">Calça Jeans</p>
-                        </div>
-                        <div style="margin: auto; margin-bottom: 1em;">
-                            <p class="line" style="height: 0px;">R$199,99</p>
-                            <p style="height: 0px;">R$149,99</p>
-                            <p class="parcelado" style="height: 0px;">ou 4x de R$ 38</p>
-                        </div>
-                    </div>
-                    <!-- Menu que aparece ao passar o mouse -->
-                    <div class="menu-hover">
-                        <p class="detalhes">Detalhes</p>
-                        <p class="detalhes">Adicionar ao Carrinho</p>
-                    </div>
-                </div>
-            </section>
-            <section
-                style="display: flex; justify-content: space-between; flex-direction: row; gap: 200px; margin-bottom: 8px;">
-                <!-- Item de Produto 1 -->
-                <div class="borda-preta imagem-roupa">
-                    <img src="img/1-svg.svg" alt="">
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div style="margin: auto;">
-                            <p style="font-size: 15px;">Calça Jeans</p>
-                        </div>
-                        <div style="margin: auto; margin-bottom: 1em;">
-                            <p class="line" style="height: 0px;">R$199,99</p>
-                            <p style="height: 0px;">R$149,99</p>
-                            <p class="parcelado" style="height: 0px;">ou 4x de R$ 38</p>
-                        </div>
-                    </div>
-                    <!-- Menu que aparece ao passar o mouse -->
-                    <div class="menu-hover">
-                        <p class="detalhes">Detalhes</p>
-                        <p class="detalhes">Adicionar ao Carrinho</p>
-                    </div>
-                </div>
-
-                <!-- Item de Produto 2 -->
-                <div class="borda-preta imagem-roupa">
-                    <img src="img/2-svg.svg" alt="">
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div style="margin: auto;">
-                            <p style="font-size: 15px;">Calça Jeans</p>
-                        </div>
-                        <div style="margin: auto; margin-bottom: 1em;">
-                            <p class="line" style="height: 0px;">R$199,99</p>
-                            <p style="height: 0px;">R$149,99</p>
-                            <p class="parcelado" style="height: 0px;">ou 4x de R$ 38</p>
-                        </div>
-                    </div>
-                    <!-- Menu que aparece ao passar o mouse -->
-                    <div class="menu-hover">
-                        <p class="detalhes">Detalhes</p>
-                        <p class="detalhes">Adicionar ao Carrinho</p>
-                    </div>
-                </div>
-
-                <!-- Item de Produto 3 -->
-                <div class="borda-preta imagem-roupa">
-                    <img src="img/2-svg.svg" alt="">
-                    <div style="display: flex; flex-direction: row; justify-content: space-between;">
-                        <div style="margin: auto;">
-                            <p style="font-size: 15px;">Calça Jeans</p>
-                        </div>
-                        <div style="margin: auto; margin-bottom: 1em;">
-                            <p class="line" style="height: 0px;">R$199,99</p>
-                            <p style="height: 0px;">R$149,99</p>
-                            <p class="parcelado" style="height: 0px;">ou 4x de R$ 38</p>
-                        </div>
-                    </div>
-                    <!-- Menu que aparece ao passar o mouse -->
-                    <div class="menu-hover">
-                        <p class="detalhes">Detalhes</p>
-                        <p class="detalhes">Adicionar ao Carrinho</p>
-                    </div>
-                </div>
-            </section>
+        <div class="roupas" style="display: flex; flex-wrap: wrap; width: 60%; padding: 3em;">
+            <!-- roupas (to do) -->
         </div>
-    </div>
+    </main>
+    <script src="script.js"></script>
 </body>
 
-</html>
+</html> 
