@@ -143,6 +143,43 @@ function filtrarRoupa(tamanho, button) {
     });
 }
 
+// Função para filtrar e exibir as roupas com base no texto de pesquisa
+function pesquisarRoupas() {
+    const filtroPesquisa = document.getElementById('barra-pesquisa').value.trim().toLowerCase();
+    const div = document.querySelector('.roupas');
+    div.innerHTML = '';
+    console.log(filtroPesquisa);
+
+    roupas.forEach(roupa => {
+        const { tamanho: tamanhos, titulo } = roupa;
+        const nomeRoupa = titulo.toLowerCase();
+
+        // Verificar se a roupa deve ser exibida com base no filtro de pesquisa
+        if (filtroPesquisa === '' || nomeRoupa.includes(filtroPesquisa)) {
+            const { roupa: roupaNova, image, title, categoria, preco, menuHover, tamanhos: tamanhosElement, button: buttonElement } = criarRoupa(roupa);
+
+            roupaNova.appendChild(image);
+            roupaNova.appendChild(title);
+            roupaNova.appendChild(categoria);
+            roupaNova.appendChild(preco);
+            menuHover.appendChild(tamanhosElement);
+            menuHover.appendChild(buttonElement);
+            roupaNova.appendChild(menuHover);
+            div.appendChild(roupaNova);
+        }
+    });
+}
+
+// Função para lidar com a alteração na barra de pesquisa
+function handleSearchInputChange() {
+    pesquisarRoupas(); // Chama a função de pesquisa ao alterar o conteúdo da barra de pesquisa
+}
+
+// Adicionar um listener para o evento 'input' na barra de pesquisa
+const barraPesquisa = document.getElementById('barra-pesquisa');
+barraPesquisa.addEventListener('input', handleSearchInputChange);
+
+
 function imgRoupaHover() {
     if (document.querySelector('.roupa-div').classList.contains('roupa-div-hover')) {
         document.querySelector('.roupa-div').classList.remove('roupa-div-hover');
