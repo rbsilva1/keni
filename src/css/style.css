@@ -11,7 +11,14 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
+    font-family: "Dosis", sans-serif;
+}
+
+.img-logo {
+    /* margin-top; */
+    height: 60px;
+    width: 150px;
+    padding-top: 1.2em;
 }
 
 .list-type-id {
@@ -60,6 +67,11 @@ body {
     display: flex;
     flex-direction: row;
     margin: auto;
+}
+
+.ph-magnifying-glass {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .list-type {
@@ -128,7 +140,6 @@ body {
 
 .texto-roupas {
     font-size: medium;
-    font-family: "Dosis",sans-serif;
     font-weight: normal;
     margin: 5px;
 }
@@ -143,13 +154,31 @@ body {
     align-items: center;
 }
 
+.bt-menu-hover {
+    background-color: #6b6b68;
+    color: #fff;
+    border-style: none;
+    border-radius: 10px;
+    padding: 1em;
+    cursor: pointer;
+}
+
+.bt-menu-hover:hover {
+    background-color: #09b609;
+}
+
+.form-hover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #header {
     background-color: #000;
     display: flex;
     justify-content: space-between;
-    height: 68px;
-    padding-top: 1em;
     box-shadow: 0px 3px 5px #807c7c;
+    align-items: center;
 }
 
 #header-text {

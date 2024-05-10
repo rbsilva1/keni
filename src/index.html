@@ -12,7 +12,7 @@
 <body>
     <header id="header">
         <div>
-            <img style="margin-left: 1em;" src="img/logo-svg.svg" alt="Polo">
+            <img class="img-logo" style="margin-left: 1em;" src="img/logo-svg.svg" alt="Polo">
         </div>
         <nav id="header-text">
             <h2 class="text">FEMININO</h2>
@@ -21,8 +21,8 @@
             <h2 class="text">ESPORTE</h2>
         </nav>
         <div>
-            <img style="margin-right: 1em;" src="img/lupa-svg.svg" alt="Polo">
-            <img style="margin-right: 1em;" src="img/perfil-svg.svg" alt="Polo">
+            <i class="ph ph-magnifying-glass" style="color: #fff; font-size: 2.2em;"></i>
+            <i class="ph ph-user" style="color: #fff; font-size: 2.2em; margin-right: 0.5em;"></i>
         </div>
     </header>
 
@@ -35,7 +35,7 @@
                         <h2 class="h2-tamanho">Tamanho</h2>
                         <span>-</span>
                     </div>
-                    <div id="tamanho" class="tamanhos"> 
+                    <div id="tamanho" class="tamanhos">
                         <div><button class="botao-tamanho button-type" onclick="toggleChecked(this)">P</button></div>
                         <div><button class="botao-tamanho button-type" onclick="toggleChecked(this)">M</button></div>
                         <div><button class="botao-tamanho button-type" onclick="toggleChecked(this)">G</button></div>
@@ -50,7 +50,7 @@
                     <div id="tipo">
                         <div class="search-bar">
                             <input type="search">
-                            <button><img src="img/lupa-preta-svg.svg" alt="Polo"></button>
+                            <button><i class="ph ph-magnifying-glass"></i></button>
                         </div>
                         <ul class="list-type list-type-id">
                             <li class="li-type"><button class="botao-tamanho button-type"
@@ -88,6 +88,7 @@
         <div class="roupas"></div>
     </main>
     <script src="script.js"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </body>
 
-</html> 
+</html>
