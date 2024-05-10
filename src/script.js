@@ -1,15 +1,3 @@
-function toggleChecked(button) {
-    button.classList.toggle('checked');
-}
-
-function toggleMenu(nomeDaDiv) {
-    if (document.getElementById(nomeDaDiv).classList.contains('filter-show')) {
-        document.getElementById(nomeDaDiv).classList.remove('filter-show');
-    } else {
-        document.getElementById(nomeDaDiv).classList.add('filter-show');
-    }
-}
-
 const roupas = [
     {
         titulo: 'Camisa Masculino',
@@ -26,7 +14,7 @@ const roupas = [
         preco: 'R$99,99',
     },
     {
-        titulo: 'Camisa Infantil',
+        titulo: 'Calça Infantil',
         categoria: 'Infantil',
         imagem: ['https://i.ibb.co/sjWbgPb/5.jpg', 'https://i.ibb.co/g4cVRQm/6.jpg'],
         tamanho: ['P', 'M', 'G'],
@@ -39,17 +27,120 @@ const roupas = [
         tamanho: ['M', 'G'],
         preco: 'R$99,99',
     },
-]
+];
 
-function filtrarRoupa(tamanho) {
-    document.querySelector('.roupas').innerHTML = '';
-    roupas.filter((roupa, index) => {
-        if (roupa.tamanho === tamanho) {
-            const div = document.createElement('div').classList.add('roupa');
-            document.createElement('img').src = 'caminho-da-sua-imagem.jpg';
-            document.querySelector('.roupas').innerHTML += `titulo: ${roupa.titulo} <br> categoria: ${roupa.categoria}<br>`;
+let filtrosAtivos = [];
+
+function toggleMenu(nomeDaDiv) {
+    if (document.getElementById(nomeDaDiv).classList.contains('filter-show')) {
+        document.getElementById(nomeDaDiv).classList.remove('filter-show');
+    } else {
+        document.getElementById(nomeDaDiv).classList.add('filter-show');
+    }
+}
+
+function toggleSearchBar() {
+    if (document.getElementById('barra-pesquisa').classList.contains('hidden')) {
+        document.getElementById('barra-pesquisa').classList.remove('hidden')
+    } else {
+        document.getElementById('barra-pesquisa').classList.add('hidden')
+    }
+}
+
+function criarRoupa(objRoupa) {
+    const { titulo, categoria, imagem, tamanho, preco } = objRoupa;
+
+    const roupa = document.createElement('div');
+    roupa.className = 'roupa-div';
+
+    const image = document.createElement('img');
+    image.src = imagem[0];
+    image.alt = titulo;
+    image.className = 'my-image';
+
+    const title = document.createElement('h2');
+    title.className = 'texto-roupas';
+    title.innerHTML = titulo.toUpperCase();
+
+    const categoriaNova = document.createElement('span');
+    categoriaNova.className = 'hidden-roupa';
+    categoriaNova.innerHTML = categoria;  
+
+    const precoNovo = document.createElement('h2');
+    precoNovo.className = 'texto-roupas';
+    precoNovo.innerHTML = preco;
+
+    const menuHover = document.createElement('form');
+    menuHover.className = 'form-hover';
+
+    const tamanhos = document.createElement('div');
+    tamanhos.className = 'menu-hover-tamanhos';
+    tamanhos.innerHTML = tamanho;
+
+    const button = document.createElement('button');
+    button.className = 'bt-menu-hover';
+    button.innerHTML = 'Adicionar ao Carrinho';
+
+    button.onclick = (e) => {
+        e.preventDefault();
+    }
+
+
+    image.onmouseout = () => {
+        image.src = imagem[0];
+    }
+
+    image.onmouseover = () => {
+        image.src = imagem[1];
+    }
+
+    return {
+        roupa,
+        image,
+        title,
+        categoria: categoriaNova,
+        preco: precoNovo,
+        menuHover,
+        tamanhos,
+        button,
+    }
+}
+
+function filtrarRoupa(tamanho, button) {
+    const isChecked = button.classList.contains('checked');
+
+    // Adicionar ou remover o tamanho dos filtros ativos
+    if (isChecked) {
+        button.classList.remove('checked');
+        filtrosAtivos = filtrosAtivos.filter(filtro => filtro !== tamanho);
+    } else {
+        button.classList.add('checked');
+        filtrosAtivos.push(tamanho);
+    }
+
+    const div = document.querySelector('.roupas');
+    div.innerHTML = '';
+
+    // Filtrar e exibir as roupas de acordo com os filtros ativos
+    roupas.forEach(roupa => {
+        const { tamanho: tamanhos } = roupa;
+
+        // Verificar se a roupa deve ser exibida com base nos filtros ativos
+        const shouldDisplay = filtrosAtivos.length === 0 || filtrosAtivos.some(filtro => tamanhos.includes(filtro));
+
+        if (shouldDisplay) {
+            const { roupa: roupaNova, image, title, categoria, preco, menuHover, tamanhos: tamanhosElement, button: buttonElement } = criarRoupa(roupa);
+
+            roupaNova.appendChild(image);
+            roupaNova.appendChild(title);
+            roupaNova.appendChild(categoria);
+            roupaNova.appendChild(preco);
+            menuHover.appendChild(tamanhosElement);
+            menuHover.appendChild(buttonElement);
+            roupaNova.appendChild(menuHover);
+            div.appendChild(roupaNova);
         }
-    })
+    });
 }
 
 function imgRoupaHover() {
@@ -64,49 +155,7 @@ function imgRoupaHover() {
 for (let i = 0; i < roupas.length; i++) {
     const div = document.querySelector('.roupas');
 
-    const roupa = document.createElement('div');
-    roupa.className = 'roupa-div';
-
-    // Conteúdo da div
-    const image = document.createElement('img');
-    image.src = roupas[i].imagem[0];
-    image.alt = 'Polo';
-    image.className = 'my-image';
-
-    image.onmouseout = () => {
-        image.src = roupas[i].imagem[0];
-    }
-
-    image.onmouseover = () => {
-        image.src = roupas[i].imagem[1];
-    }
-
-    const title = document.createElement('h2');
-    title.className = 'texto-roupas';
-    title.innerHTML = roupas[i].titulo.toUpperCase();
-
-    const categoria = document.createElement('span');
-    categoria.className = 'hidden-roupa';
-    categoria.innerHTML = roupas[i].categoria;  
-
-    const preco = document.createElement('h2');
-    preco.className = 'texto-roupas';
-    preco.innerHTML = roupas[i].preco;
-
-    const menuHover = document.createElement('form');
-    menuHover.className = 'form-hover';
-
-    const tamanhos = document.createElement('div');
-    tamanhos.className = 'menu-hover-tamanhos';
-    tamanhos.innerHTML = roupas[i].tamanho;
-
-    const button = document.createElement('button');
-    button.className = 'bt-menu-hover';
-    button.innerHTML = 'Adicionar ao Carrinho';
-
-    button.onclick = (e) => {
-        e.preventDefault();
-    }
+    const { roupa, image, title, categoria, preco, menuHover, tamanhos, button } = criarRoupa(roupas[i]);
 
     // Adiciona os elementos à div
     roupa.appendChild(image);

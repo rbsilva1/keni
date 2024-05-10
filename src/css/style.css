@@ -21,6 +21,10 @@ body {
     padding-top: 1.2em;
 }
 
+.ph-shopping-cart:hover {
+
+}
+
 .list-type-id {
     list-style-type: none;
     padding-inline-start: 0px;
@@ -65,13 +69,21 @@ body {
 
 .search-bar {
     display: flex;
-    flex-direction: row;
-    margin: auto;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 0.5em;
+    z-index: 1; /* Para garantir que fique acima de outros elementos */
+}
+
+.hidden {
+    display: none;
 }
 
 .ph-magnifying-glass {
     font-size: 20px;
     font-weight: bold;
+    cursor: pointer;
+    margin-right: 3em;
 }
 
 .list-type {
@@ -185,6 +197,12 @@ body {
     display: flex;
     flex-direction: row;
     gap: 3em;
+}
+
+#barra-pesquisa {
+    font-family: "Dosis", sans-serif;
+    font-size: 15px;
+    width: 450px;
 }
 
 #section-box {
