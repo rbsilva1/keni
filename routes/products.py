@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from src.controller.ProductsController import ProductsController
 from src.repositories.ProductsRepository import ProductsRepository
 
@@ -24,7 +24,7 @@ products = Blueprint('products', __name__)
 
 @products.route('/list')
 def list_products():
-    return product_controller.list() # colocar argumentos
+    return product_controller.list()
 
 @products.route('/create')
 def create():

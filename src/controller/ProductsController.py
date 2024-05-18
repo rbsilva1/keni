@@ -2,7 +2,6 @@ from typing import List
 from src.repositories.ProductsRepository import ProductsRepository
 from src.models.Product import Product
 
-
 class ProductsController:
     repository: ProductsRepository
 

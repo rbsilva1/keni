@@ -1,11 +1,10 @@
-from typing import List
+from typing import List, Optional
 from src.models.Product import Product
-
 
 class ProductsRepository:
     products: List[Product] = []
 
-    def get_products(self, id: int) -> Product:
+    def get_products(self, id: int) -> Optional[Product]:
         for i in range(len(self.products)):
             if self.products[i].getId() == id:
                 return self.products[i]
@@ -28,6 +27,7 @@ class ProductsRepository:
                 self.products[i].preco = preco
 
     def list_products(self) -> List[Product]:
+        self.products.append(Product("oi", "oi", ['oi', 'oi'], ['oi', 'oi'], 12.8, 1).to_dict())
         return self.products
 
     def delete(self, id: int) -> None:
