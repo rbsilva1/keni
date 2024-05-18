@@ -1,5 +1,6 @@
 const roupas = [
     {
+        id: 1,
         titulo: 'Camisa Masculino',
         categoria: 'Masculino',
         imagem: ['https://i.ibb.co/khmgBf1/1.jpg', 'https://i.ibb.co/Dk4sGT7/2.jpg'],
@@ -7,6 +8,7 @@ const roupas = [
         preco: 'R$99,99',
     },
     {
+        id: 2,
         titulo: 'Blusa Feminina',
         categoria: 'Feminino',
         imagem: ['https://i.ibb.co/S53M2kt/3.jpg', 'https://i.ibb.co/g9ZzPbW/4.jpg'],
@@ -14,6 +16,7 @@ const roupas = [
         preco: 'R$99,99',
     },
     {
+        id: 3,
         titulo: 'Calça Infantil',
         categoria: 'Infantil',
         imagem: ['https://i.ibb.co/sjWbgPb/5.jpg', 'https://i.ibb.co/g4cVRQm/6.jpg'],
@@ -21,6 +24,7 @@ const roupas = [
         preco: 'R$99,99',
     },
     {
+        id: 4,
         titulo: 'Camisa Esportiva',
         categoria: 'Esporte',
         imagem: ['https://i.ibb.co/hKbWD8g/7.jpg', 'https://i.ibb.co/SvLcJNW/8.jpg'],
