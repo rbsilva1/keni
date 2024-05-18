@@ -1,38 +1,32 @@
 from typing import List
-from repositories.ProductsRepository import ProductsRepository
-from models.Product import Product
+from src.repositories.ProductsRepository import ProductsRepository
+from src.models.Product import Product
 
-"""
-    PRODUCT:
-        id: int
-        titulo: str
-        categoria: str
-        imagem: List[str]
-        tamanho: List[str]
-        preco: bool
-"""
 
 class ProductsController:
-  repository: ProductsRepository
+    repository: ProductsRepository
 
-  def __init__(self, repository:ProductsRepository) -> None:
-      self.repository = repository
+    def __init__(self, repository: ProductsRepository) -> None:
+        self.repository = repository
 
-  def get_product(self, id:int) -> Product:
-      # return self.repository.getTask(id)
-      pass
+    def get_product(self, id: int) -> Product:
+        return self.repository.get_products(id)
 
-  def create(self, titulo: str, categoria: str, imagem: List[str], tamanho: List[str], preco: bool) -> Product:
-      # return self.repository.create(name_, typ_)
-      pass
+    def create(
+        self,
+        titulo: str,
+        categoria: str,
+        imagem: List[str],
+        tamanho: List[str],
+        preco: bool,
+    ) -> Product:
+        return self.repository.create(self, titulo, categoria, imagem, tamanho, preco)
 
-  def delete(self, id:int) -> bool:
-      # return self.repository.delete(id)
-      pass
+    def delete(self, id: int) -> bool:
+        return self.repository.delete(self, id)
 
-  def update(self, id: int, titulo: str, preco: bool) -> None:
-      # return self.repository.updateTask(task_, typ_)
-      pass
+    def update(self, id: int, titulo: str, preco: bool) -> None:
+        return self.repository.update(self, id, titulo, preco)
 
-  def list(self) -> List[Product]:
-      return self.repository.listTask()
+    def list(self) -> List[Product]:
+        return self.repository.list_products()

@@ -68,7 +68,7 @@ function criarRoupa(objRoupa) {
 
     const categoriaNova = document.createElement('span');
     categoriaNova.className = 'hidden-roupa';
-    categoriaNova.innerHTML = categoria;  
+    categoriaNova.innerHTML = categoria;
 
     const precoNovo = document.createElement('h2');
     precoNovo.className = 'texto-roupas';
@@ -195,7 +195,7 @@ for (let i = 0; i < roupas.length; i++) {
 
     menuHover.appendChild(tamanhos);
     menuHover.appendChild(button);
-    
+
     roupa.appendChild(menuHover);
 
     div.appendChild(roupa);
