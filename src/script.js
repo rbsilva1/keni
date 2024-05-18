@@ -106,56 +106,34 @@ function criarRoupa(objRoupa) {
     }
 }
 
-function filtrarRoupa(tamanho, button) {
-    const isChecked = button.classList.contains('checked');
+function atualizarRoupas(tamanho, button) {
+    // Se a função for chamada com um tamanho e botão, filtrar por tamanho
+    if (tamanho && button) {
+        const isChecked = button.classList.contains('checked');
 
-    // Adicionar ou remover o tamanho dos filtros ativos
-    if (isChecked) {
-        button.classList.remove('checked');
-        filtrosAtivos = filtrosAtivos.filter(filtro => filtro !== tamanho);
-    } else {
-        button.classList.add('checked');
-        filtrosAtivos.push(tamanho);
+        // Adicionar ou remover o tamanho dos filtros ativos
+        if (isChecked) {
+            button.classList.remove('checked');
+            filtrosAtivos = filtrosAtivos.filter(filtro => filtro !== tamanho);
+        } else {
+            button.classList.add('checked');
+            filtrosAtivos.push(tamanho);
+        }
     }
 
-    const div = document.querySelector('.roupas');
-    div.innerHTML = '';
-
-    // Filtrar e exibir as roupas de acordo com os filtros ativos
-    roupas.forEach(roupa => {
-        const { tamanho: tamanhos } = roupa;
-
-        // Verificar se a roupa deve ser exibida com base nos filtros ativos
-        const shouldDisplay = filtrosAtivos.length === 0 || filtrosAtivos.some(filtro => tamanhos.includes(filtro));
-
-        if (shouldDisplay) {
-            const { roupa: roupaNova, image, title, categoria, preco, menuHover, tamanhos: tamanhosElement, button: buttonElement } = criarRoupa(roupa);
-
-            roupaNova.appendChild(image);
-            roupaNova.appendChild(title);
-            roupaNova.appendChild(categoria);
-            roupaNova.appendChild(preco);
-            menuHover.appendChild(tamanhosElement);
-            menuHover.appendChild(buttonElement);
-            roupaNova.appendChild(menuHover);
-            div.appendChild(roupaNova);
-        }
-    });
-}
-
-// Função para filtrar e exibir as roupas com base no texto de pesquisa
-function pesquisarRoupas() {
     const filtroPesquisa = document.getElementById('barra-pesquisa').value.trim().toLowerCase();
     const div = document.querySelector('.roupas');
     div.innerHTML = '';
-    console.log(filtroPesquisa);
 
     roupas.forEach(roupa => {
         const { tamanho: tamanhos, titulo } = roupa;
         const nomeRoupa = titulo.toLowerCase();
 
-        // Verificar se a roupa deve ser exibida com base no filtro de pesquisa
-        if (filtroPesquisa === '' || nomeRoupa.includes(filtroPesquisa)) {
+        // Verificar se a roupa deve ser exibida com base nos filtros ativos e no filtro de pesquisa
+        const shouldDisplayByTamanho = filtrosAtivos.length === 0 || filtrosAtivos.some(filtro => tamanhos.includes(filtro));
+        const shouldDisplayByPesquisa = filtroPesquisa === '' || nomeRoupa.includes(filtroPesquisa);
+
+        if (shouldDisplayByTamanho && shouldDisplayByPesquisa) {
             const { roupa: roupaNova, image, title, categoria, preco, menuHover, tamanhos: tamanhosElement, button: buttonElement } = criarRoupa(roupa);
 
             roupaNova.appendChild(image);
@@ -169,6 +147,17 @@ function pesquisarRoupas() {
         }
     });
 }
+
+// Função para ser chamada ao pesquisar
+function pesquisarRoupas() {
+    atualizarRoupas();
+}
+
+// Função para ser chamada ao filtrar por tamanho
+function filtrarRoupa(tamanho, button) {
+    atualizarRoupas(tamanho, button);
+}
+
 
 // Função para lidar com a alteração na barra de pesquisa
 function handleSearchInputChange() {
