@@ -6,5 +6,4 @@ class ProductsRepository:
 
   def __init__(self, products: List[Product]) -> None:
     self.products = products
-  
-  
+    

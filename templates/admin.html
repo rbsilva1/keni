@@ -2,13 +2,60 @@
 <html lang="pt-BR">
 
 <head>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="shortcut icon" href="../static/assets/logo-svg.svg" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>KENI - Loja Oficial</title>
 </head>
 
 <body>
-
+    <header id="header">
+        <div>
+            <img class="img-logo" style="margin-left: 1em;" src="../static/assets/logo-svg.svg" alt="Polo">
+        </div>
+    </header>
+    <div class="parent container d-flex flex-column justify-content-center" style="min-height: 40vh;">
+        <div class="d-flex flex-row align-items-center justify-content-between" style="padding-bottom: 2em;">
+            <div class="flex-grow-1 text-center">
+                <h2>Produtos</h2>
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary btn-sm">Adicionar</button>
+            </div>
+        </div>
+        <table class="table table-bordered table-striped table-dark table-responsive fs-5 text-center">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Imagem</th>
+                    <th scope="col">Tamanho</th>
+                    <th scope="col">Preço</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Teste titulo</td>
+                    <td>Teste categoria</td>
+                    <td>Teste imagem</td>
+                    <td>Teste tamanho</td>
+                    <td>Teste preço</td>
+                    <td><i class="ph ph-pencil" style="color: rgb(0, 195, 255);"></i> <i class="ph ph-trash" style="color: #f00;"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="../static/JavaScript/Admin.js"></script>
 </body>
 
 </html>
