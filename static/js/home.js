@@ -1,37 +1,28 @@
-const roupas = [
-    {
-        id: 1,
-        titulo: 'Camisa Masculino',
-        categoria: 'Masculino',
-        imagem: ['https://i.ibb.co/khmgBf1/1.jpg', 'https://i.ibb.co/Dk4sGT7/2.jpg'],
-        tamanho: ['P', 'G'],
-        preco: 'R$99,99',
-    },
-    {
-        id: 2,
-        titulo: 'Blusa Feminina',
-        categoria: 'Feminino',
-        imagem: ['https://i.ibb.co/S53M2kt/3.jpg', 'https://i.ibb.co/g9ZzPbW/4.jpg'],
-        tamanho: ['G'],
-        preco: 'R$99,99',
-    },
-    {
-        id: 3,
-        titulo: 'Calça Infantil',
-        categoria: 'Infantil',
-        imagem: ['https://i.ibb.co/sjWbgPb/5.jpg', 'https://i.ibb.co/g4cVRQm/6.jpg'],
-        tamanho: ['P', 'M', 'G'],
-        preco: 'R$99,99',
-    },
-    {
-        id: 4,
-        titulo: 'Camisa Esportiva',
-        categoria: 'Esporte',
-        imagem: ['https://i.ibb.co/hKbWD8g/7.jpg', 'https://i.ibb.co/SvLcJNW/8.jpg'],
-        tamanho: ['M', 'G'],
-        preco: 'R$99,99',
-    },
-];
+let roupas;
+
+(async function list() {
+    roupas = await (await fetch('/products/list')).json()
+
+    for (let i = 0; i < roupas.length; i++) {
+        const div = document.querySelector('.roupas');
+
+        console.log(div)
+        const { roupa, image, title, categoria, preco, menuHover, tamanhos, button } = criarRoupa(roupas[i]);
+
+        // Adiciona os elementos à div
+        roupa.appendChild(image);
+        roupa.appendChild(title);
+        roupa.appendChild(categoria);
+        roupa.appendChild(preco);
+
+        menuHover.appendChild(tamanhos);
+        menuHover.appendChild(button);
+
+        roupa.appendChild(menuHover);
+
+        div.appendChild(roupa);
+    }
+})()
 
 let filtrosAtivos = [];
 
@@ -90,13 +81,13 @@ function criarRoupa(objRoupa) {
     }
 
 
-    image.onmouseout = () => {
-        image.src = imagem[0];
-    }
+    // image.onmouseout = () => {
+    //     image.src = imagem[0];
+    // }
 
-    image.onmouseover = () => {
-        image.src = imagem[1];
-    }
+    // image.onmouseover = () => {
+    //     image.src = imagem[1];
+    // }
 
     return {
         roupa,
@@ -179,24 +170,4 @@ function imgRoupaHover() {
     } else {
         document.querySelector('.roupa-div').classList.add('roupa-div-hover');
     }
-}
-
-// // Loop para criar as divs For
-for (let i = 0; i < roupas.length; i++) {
-    const div = document.querySelector('.roupas');
-
-    const { roupa, image, title, categoria, preco, menuHover, tamanhos, button } = criarRoupa(roupas[i]);
-
-    // Adiciona os elementos à div
-    roupa.appendChild(image);
-    roupa.appendChild(title);
-    roupa.appendChild(categoria);
-    roupa.appendChild(preco);
-
-    menuHover.appendChild(tamanhos);
-    menuHover.appendChild(button);
-
-    roupa.appendChild(menuHover);
-
-    div.appendChild(roupa);
 }

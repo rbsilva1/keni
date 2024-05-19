@@ -25,22 +25,34 @@ async function list() {
         preco.innerText = produtos[i].preco
 
         const acoes = document.createElement('td')
+        acoes.setAttribute('display', 'flex')
+        acoes.setAttribute('justify-content', 'space-between')
         let botao = document.createElement('button')
         const editar = document.createElement('i')
         editar.classList.add('ph')
         editar.classList.add('ph-pencil')
-        editar.setAttribute('id', produtos[i].id)
         editar.style.setProperty('color', '#00c3ff')
+        botao.style.setProperty('padding', '0')
+        botao.style.setProperty('border', 'none')
+        botao.style.setProperty('background', 'none')
+        botao.setAttribute("data-bs-toggle", "modal")
+        botao.setAttribute("data-bs-target", "#modal-edicao")
+        botao.type = 'button'
+        botao.setAttribute("data-id", produtos[i].id)
         botao.appendChild(editar)
+        acoes.appendChild(botao)
         const remover = document.createElement('i')
         botao = document.createElement('button')
+        botao.style.setProperty('padding', '0')
+        botao.style.setProperty('border', 'none')
+        botao.style.setProperty('background', 'none')
+        botao.setAttribute('onclick', `remove(${produtos[i].id})`)
         remover.classList.add('ph')
         remover.classList.add('ph-trash')
-        remover.setAttribute('id', produtos[i].id)
         remover.style.setProperty('color', '#ff0000')
         botao.appendChild(remover)
-        acoes.appendChild(editar)
-        acoes.appendChild(remover)
+        acoes.appendChild(botao)
+
 
         tr.appendChild(id)
         tr.appendChild(titulo)
@@ -57,22 +69,30 @@ async function list() {
 list()
 
 async function remove(id) {
-    const removed = await fetch(`/products/remove/${id}`, {
+    const removed = await fetch(`/products/delete/${id}`, {
         method: 'DELETE',
     })
 
-    if (removed.statusCode === 200) {
+    if (removed.status === 200) {
         list()
     }
 }
+
+const formCadastro = document.getElementById('modal-cadastro')
+formCadastro.addEventListener('submit', (e) => add(e))
+const formEdicao = document.getElementById('modal-edicao')
+// formEdicao.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     console.log(e.target);
+// })
 
 async function add(e) {
     e.preventDefault()
 
     const titulo = document.querySelector('#titulo').value
     const categoria = document.querySelector('#categoria').value
-    const imagem = "document.querySelector('#imagem').value"
-    const tamanho = document.querySelector('#tamanho').value
+    const imagem = "https://i.ibb.co/khmgBf1/1.jpg"
+    const tamanho = document.querySelector('#tamanho').value.toUpperCase()
     const preco = document.querySelector('#preco').value
 
     const response = await fetch('/products/create', {
@@ -94,13 +114,11 @@ async function add(e) {
     }
 }
 
-async function update(e, id) {
-    e.preventDefault()
-
+async function update(id) {
     const titulo = document.querySelector('#titulo').value
     const categoria = document.querySelector('#categoria').value
     const imagem = document.querySelector('#imagem').value
-    const tamanho = document.querySelector('#tamanho').value
+    const tamanho = document.querySelector('#tamanho').value.toUpperCase()
     const preco = document.querySelector('#preco').value
 
     const response = await fetch(`/update/${id}`, {

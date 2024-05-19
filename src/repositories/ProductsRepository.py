@@ -6,7 +6,7 @@ class ProductsRepository:
 
     def get_products(self, id: int) -> Optional[Product]:
         for i in range(len(self.products)):
-            if self.products[i].getId() == id:
+            if self.products[i]['id'] == id:
                 return self.products[i]
         return None
 
@@ -22,7 +22,7 @@ class ProductsRepository:
 
     def update(self, id: int, titulo: str, preco: bool) -> bool:
         for i in range(len(self.products)):
-            if self.products[i].getId() == id:
+            if self.products[i]['id'] == id:
                 self.products[i].titulo = titulo
                 self.products[i].preco = preco
                 return True
@@ -33,7 +33,7 @@ class ProductsRepository:
 
     def delete(self, id: int) -> bool:
         for i in range(len(self.products)):
-            if self.products[i].getId() == id:
+            if self.products[i]['id'] == id:
                 self.products.pop(i)
                 return True
         return False
