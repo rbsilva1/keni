@@ -18,18 +18,22 @@ class ProductsRepository:
         tamanho: List[str],
         preco: bool,
     ) -> None:
-        self.products.append(Product(titulo, categoria, imagem, tamanho, preco))
+        self.products.append(Product(titulo, categoria, imagem, tamanho, preco, len(self.products) + 1).to_dict())
 
-    def update(self, id: int, titulo: str, preco: bool) -> None:
+    def update(self, id: int, titulo: str, preco: bool) -> bool:
         for i in range(len(self.products)):
             if self.products[i].getId() == id:
                 self.products[i].titulo = titulo
                 self.products[i].preco = preco
+                return True
+        return False
 
     def list_products(self) -> List[Product]:
-        self.products.append(Product("oi", "oi", ['oi', 'oi'], ['oi', 'oi'], 12.8, 1).to_dict())
         return self.products
 
-    def delete(self, id: int) -> None:
-        # to do
-        pass
+    def delete(self, id: int) -> bool:
+        for i in range(len(self.products)):
+            if self.products[i].getId() == id:
+                self.products.pop(i)
+                return True
+        return False

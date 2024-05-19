@@ -19,13 +19,13 @@ class ProductsController:
         tamanho: List[str],
         preco: bool,
     ) -> Product:
-        return self.repository.create(self, titulo, categoria, imagem, tamanho, preco)
+        return self.repository.create(titulo, categoria, imagem, tamanho, preco)
 
     def delete(self, id: int) -> bool:
-        return self.repository.delete(self, id)
+        return self.repository.delete(id)
 
-    def update(self, id: int, titulo: str, preco: bool) -> None:
-        return self.repository.update(self, id, titulo, preco)
+    def update(self, id: int, titulo: str, preco: bool) -> bool:
+        return self.repository.update(id, titulo, preco)
 
     def list(self) -> List[Product]:
         return self.repository.list_products()
