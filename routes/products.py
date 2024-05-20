@@ -6,29 +6,27 @@ product_repository = ProductsRepository()
 product_controller = ProductsController(product_repository)
 products = Blueprint('products', __name__)
 
-@products.route('/list')
-def list_products():
-    return product_controller.list()
+@products.route('/', methods=["GET", "POST"])
+def products():
+    if request.method == "POST":
+        produto = request.json
+        product_controller.create(produto.get('titulo'), produto.get('categoria'), [produto.get('imagem')], [produto.get('tamanho')], produto.get('preco'))
+        return jsonify("Produto criado com sucesso!"), 201
+    elif request.method == "GET":
+        return product_controller.list()
 
-@products.route('/create', methods=["POST"])
-def create():
-    produto = request.json
-    product_controller.create(produto.get('titulo'), produto.get('categoria'), [produto.get('imagem')], [produto.get('tamanho')], produto.get('preco'))
-    return jsonify("Produto criado com sucesso!"), 201
-
-@products.route('/delete/<int:id>', methods=["DELETE"])
+@products.route('/<int:id>', methods=["DELETE", "PUT"])
 def delete(id):
-    deleted = product_controller.delete(id)
-    if deleted:
-        return jsonify("Produto atualizado com sucesso!"), 200
-    else:
-        return jsonify("Bad Request"), 400
-
-@products.route('/update/<int:id>', methods=["PUT"])
-def update(id):
-    produto = request.json
-    updated = product_controller.update(id, produto.get('titulo'), produto.get('preco'))
-    if updated:
-        return jsonify("Produto atualizado com sucesso!"), 200
-    else:
-        return jsonify("Bad Request"), 400
+    if (request.method == "DELETE"):
+        deleted = product_controller.delete(id)
+        if deleted:
+            return jsonify("Produto atualizado com sucesso!"), 200
+        else:
+            return jsonify("Bad Request"), 400
+    elif request.method == "PUT":
+        produto = request.json
+        updated = product_controller.update(id, produto.get('titulo'), produto.get('preco'))
+        if updated:
+            return jsonify("Produto atualizado com sucesso!"), 200
+        else:
+            return jsonify("Bad Request"), 400

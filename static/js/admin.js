@@ -1,5 +1,5 @@
 async function list() {
-    let produtos = await (await fetch('/products/list')).json()
+    let produtos = await (await fetch('/products')).json()
     const tbody = document.querySelector('#lista-produtos')
     tbody.innerHTML = ''
 
@@ -69,7 +69,7 @@ async function list() {
 list()
 
 async function remove(id) {
-    const removed = await fetch(`/products/delete/${id}`, {
+    const removed = await fetch(`/products/${id}`, {
         method: 'DELETE',
     })
 
@@ -95,7 +95,7 @@ async function add(e) {
     const tamanho = document.querySelector('#tamanho').value.toUpperCase()
     const preco = document.querySelector('#preco').value
 
-    const response = await fetch('/products/create', {
+    const response = await fetch('/products', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -121,7 +121,7 @@ async function update(id) {
     const tamanho = document.querySelector('#tamanho').value.toUpperCase()
     const preco = document.querySelector('#preco').value
 
-    const response = await fetch(`/update/${id}`, {
+    const response = await fetch(`/products/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
