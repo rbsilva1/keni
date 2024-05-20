@@ -7,7 +7,7 @@ product_controller = ProductsController(product_repository)
 products = Blueprint('products', __name__)
 
 @products.route('/', methods=["GET", "POST"])
-def products():
+def products_():
     if request.method == "POST":
         produto = request.json
         product_controller.create(produto.get('titulo'), produto.get('categoria'), [produto.get('imagem')], [produto.get('tamanho')], produto.get('preco'))
@@ -16,7 +16,7 @@ def products():
         return product_controller.list()
 
 @products.route('/<int:id>', methods=["DELETE", "PUT"])
-def delete(id):
+def products_id(id):
     if (request.method == "DELETE"):
         deleted = product_controller.delete(id)
         if deleted:
