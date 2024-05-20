@@ -1,7 +1,7 @@
 let roupas;
 
 (async function list() {
-    roupas = await (await fetch('/products/list')).json()
+    roupas = await (await fetch('/products/')).json()
 
     for (let i = 0; i < roupas.length; i++) {
         const div = document.querySelector('.roupas');
@@ -22,7 +22,9 @@ let roupas;
 
         div.appendChild(roupa);
     }
-})()
+})
+
+list()
 
 let filtrosAtivos = [];
 

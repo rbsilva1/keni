@@ -95,22 +95,24 @@ async function add(e) {
     const tamanho = document.querySelector('#tamanho').value.toUpperCase()
     const preco = document.querySelector('#preco').value
 
-    const response = await fetch('/products', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            titulo,
-            categoria,
-            imagem,
-            tamanho,
-            preco,
-        }),
-    })
+    if (titulo != "" && categoria != "" && tamanho != "" && preco != "") {
+        const response = await fetch('/products', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                titulo,
+                categoria,
+                imagem,
+                tamanho,
+                preco,
+            }),
+        })
 
-    if (response.status === 201) {
-        list()
+        if (response.status === 201) {
+            list()
+        }
     }
 }
 
