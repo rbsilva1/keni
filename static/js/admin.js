@@ -82,7 +82,10 @@ const formCadastro = document.getElementById('modal-cadastro')
 formCadastro.addEventListener('submit', (e) => add(e))
 
 const formEdicao = document.getElementById('modal-edicao')
-formEdicao.addEventListener('submit', (e) => update(e))
+formEdicao.addEventListener('submit', (e) => {
+    e.preventDefault()
+    update(e)
+})
 
 async function add(e) {
     e.preventDefault()
@@ -92,8 +95,6 @@ async function add(e) {
     const imagem = "https://i.ibb.co/khmgBf1/1.jpg"
     const tamanho = document.querySelector('#tamanho').value.toUpperCase()
     const preco = document.querySelector('#preco').value
-
-    console.log(titulo, categoria, imagem, tamanho, preco)
 
     if (titulo != "" && categoria != "" && tamanho != "" && preco != "") {
         const response = await fetch('/products', {

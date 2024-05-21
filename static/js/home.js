@@ -1,6 +1,6 @@
 let roupas;
 
-(async function list() {
+async function list() {
     roupas = await (await fetch('/products/')).json()
 
     for (let i = 0; i < roupas.length; i++) {
@@ -22,7 +22,7 @@ let roupas;
 
         div.appendChild(roupa);
     }
-})
+}
 
 list()
 
