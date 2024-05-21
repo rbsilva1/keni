@@ -80,11 +80,9 @@ async function remove(id) {
 
 const formCadastro = document.getElementById('modal-cadastro')
 formCadastro.addEventListener('submit', (e) => add(e))
+
 const formEdicao = document.getElementById('modal-edicao')
-// formEdicao.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     console.log(e.target);
-// })
+formEdicao.addEventListener('submit', (e) => update(e))
 
 async function add(e) {
     e.preventDefault()
@@ -94,6 +92,8 @@ async function add(e) {
     const imagem = "https://i.ibb.co/khmgBf1/1.jpg"
     const tamanho = document.querySelector('#tamanho').value.toUpperCase()
     const preco = document.querySelector('#preco').value
+
+    console.log(titulo, categoria, imagem, tamanho, preco)
 
     if (titulo != "" && categoria != "" && tamanho != "" && preco != "") {
         const response = await fetch('/products', {
@@ -117,11 +117,15 @@ async function add(e) {
 }
 
 async function update(id) {
-    const titulo = document.querySelector('#titulo').value
-    const categoria = document.querySelector('#categoria').value
-    const imagem = document.querySelector('#imagem').value
-    const tamanho = document.querySelector('#tamanho').value.toUpperCase()
-    const preco = document.querySelector('#preco').value
+    const titulo = document.querySelector('#titulo-edicao').value
+    const categoria = document.querySelector('#categoria-edicao').value
+    // const imagem = document.querySelector('#imagem').value
+    const tamanho = document.querySelector('#tamanho-edicao').value.toUpperCase()
+    const preco = document.querySelector('#preco-edicao').value
+
+    if (titulo != "" && categoria != "" && tamanho != "" && preco != "") {
+        console.log(titulo, categoria, tamanho, preco)
+    }
 
     const response = await fetch(`/products/${id}`, {
         method: 'PUT',
@@ -131,7 +135,6 @@ async function update(id) {
         body: JSON.stringify({
             titulo,
             categoria,
-            imagem,
             tamanho,
             preco,
         }),
