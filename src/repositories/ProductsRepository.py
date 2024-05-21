@@ -20,11 +20,14 @@ class ProductsRepository:
     ) -> None:
         self.products.append(Product(titulo, categoria, imagem, tamanho, preco, len(self.products) + 1).to_dict())
 
-    def update(self, id: int, titulo: str, preco: bool) -> bool:
+    def update(self, id: int, titulo: str, preco: bool, categoria: str, tamanho: str) -> bool:
         for i in range(len(self.products)):
             if self.products[i]['id'] == id:
-                self.products[i].titulo = titulo
-                self.products[i].preco = preco
+                self.products[i]['titulo'] = titulo
+                self.products[i]['preco'] = preco
+                self.products[i]['categoria'] = categoria
+                self.products[i]['tamanho'] = tamanho
+
                 return True
         return False
 

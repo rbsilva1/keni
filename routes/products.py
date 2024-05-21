@@ -25,7 +25,7 @@ def products_id(id):
             return jsonify("Bad Request"), 400
     elif request.method == "PUT":
         produto = request.json
-        updated = product_controller.update(id, produto.get('titulo'), produto.get('preco'))
+        updated = product_controller.update(id, produto.get('titulo'), produto.get('preco'), produto.get('categoria'), produto.get('tamanho'))
         if updated:
             return jsonify("Produto atualizado com sucesso!"), 200
         else:

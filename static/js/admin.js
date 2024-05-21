@@ -38,7 +38,9 @@ async function list() {
         botao.setAttribute("data-bs-toggle", "modal")
         botao.setAttribute("data-bs-target", "#modal-edicao")
         botao.type = 'button'
-        botao.setAttribute("data-id", produtos[i].id)
+        botao.addEventListener('click', () => {
+            formEdicao.setAttribute("data-id", produtos[i].id)
+        })
         botao.appendChild(editar)
         acoes.appendChild(botao)
         const remover = document.createElement('i')
@@ -117,16 +119,13 @@ async function add(e) {
     }
 }
 
-async function update(id) {
+async function update() {
+    const id = formEdicao.getAttribute('data-id')
     const titulo = document.querySelector('#titulo-edicao').value
     const categoria = document.querySelector('#categoria-edicao').value
     // const imagem = document.querySelector('#imagem').value
     const tamanho = document.querySelector('#tamanho-edicao').value.toUpperCase()
     const preco = document.querySelector('#preco-edicao').value
-
-    if (titulo != "" && categoria != "" && tamanho != "" && preco != "") {
-        console.log(titulo, categoria, tamanho, preco)
-    }
 
     const response = await fetch(`/products/${id}`, {
         method: 'PUT',
@@ -141,7 +140,11 @@ async function update(id) {
         }),
     })
 
-    if (response.statusCode === 200) {
+    if (response.status === 200) {
+        document.querySelector('#titulo-edicao').value = ''
+        document.querySelector('#categoria-edicao').value = ''
+        document.querySelector('#tamanho-edicao').value = ''
+        document.querySelector('#preco-edicao').value = ''
         list()
     }
 }
