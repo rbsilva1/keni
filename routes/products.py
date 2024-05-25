@@ -10,7 +10,7 @@ products = Blueprint('products', __name__)
 def products_():
     if request.method == "POST":
         produto = request.json
-        product_controller.create(produto.get('titulo'), produto.get('categoria'), [produto.get('imagem')], [produto.get('tamanho')], produto.get('preco'))
+        product_controller.create(produto.get('titulo'), produto.get('categoria'), produto.get('imagem'), "https://i.ibb.co/Dk4sGT7/2.jpg", produto.get('tamanho'), produto.get('preco'))
         return jsonify("Produto criado com sucesso!"), 201
     elif request.method == "GET":
         return product_controller.list()

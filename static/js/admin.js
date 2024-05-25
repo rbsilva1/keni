@@ -16,7 +16,7 @@ async function list() {
         categoria.innerText = produtos[i].categoria
 
         const imagem = document.createElement('td')
-        imagem.innerText = produtos[i].imagem[0]
+        imagem.innerText = produtos[i].imagem1
 
         const tamanho = document.createElement('td')
         tamanho.innerText = produtos[i].tamanho

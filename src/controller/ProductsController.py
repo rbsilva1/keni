@@ -15,11 +15,12 @@ class ProductsController:
         self,
         titulo: str,
         categoria: str,
-        imagem: List[str],
-        tamanho: List[str],
+        imagem1: str,
+        imagem2: str,
+        tamanho:str,
         preco: bool,
     ) -> Product:
-        return self.repository.create(titulo, categoria, imagem, tamanho, preco)
+        return self.repository.create(titulo, categoria, imagem1, imagem2, tamanho, preco)
 
     def delete(self, id: int) -> bool:
         return self.repository.delete(id)

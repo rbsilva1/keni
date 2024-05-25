@@ -1,42 +1,48 @@
 from typing import List, Optional
 from src.models.Product import Product
+from src.db import db
 
 class ProductsRepository:
-    products: List[Product] = []
-
     def get_products(self, id: int) -> Optional[Product]:
-        for i in range(len(self.products)):
-            if self.products[i]['id'] == id:
-                return self.products[i]
+        product = Product.query.filter(Product.id == id)
+        if product:
+            return self.product
         return None
 
     def create(
         self,
         titulo: str,
         categoria: str,
-        imagem: List[str],
-        tamanho: List[str],
+        imagem1: str,
+        imagem2: str,
+        tamanho: str,
         preco: bool,
     ) -> None:
-        self.products.append(Product(titulo, categoria, imagem, tamanho, preco, len(self.products) + 1).to_dict())
+        db.session.add(Product(titulo, categoria, imagem1, imagem2, tamanho, preco))
+        db.session.commit()
 
     def update(self, id: int, titulo: str, preco: bool, categoria: str, tamanho: str) -> bool:
-        for i in range(len(self.products)):
-            if self.products[i]['id'] == id:
-                self.products[i]['titulo'] = titulo
-                self.products[i]['preco'] = preco
-                self.products[i]['categoria'] = categoria
-                self.products[i]['tamanho'] = tamanho
-
-                return True
+        product = Product.query.filter(Product.id == id).update(
+            {
+                "titulo":titulo,
+                "preco": preco,
+                "categoria": categoria,
+                "tamanho": tamanho
+            }
+        )
+        if product:
+            db.session.commit()
+            return True
         return False
 
     def list_products(self) -> List[Product]:
-        return self.products
+        products = Product.query.all()
+        return [row.to_dict() for row in products]
+
 
     def delete(self, id: int) -> bool:
-        for i in range(len(self.products)):
-            if self.products[i]['id'] == id:
-                self.products.pop(i)
-                return True
+        product = Product.query.filter(Product.id == id).delete()
+        if product:
+            db.session.commit()
+            return True
         return False

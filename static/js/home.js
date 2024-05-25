@@ -22,6 +22,7 @@ async function list() {
 
         div.appendChild(roupa);
     }
+    console.log(roupa)
 }
 
 list()
@@ -45,15 +46,51 @@ function toggleSearchBar() {
 }
 
 function criarRoupa(objRoupa) {
-    const { titulo, categoria, imagem, tamanho, preco } = objRoupa;
+    const { titulo, categoria, imagem1, imagem2, tamanho, preco } = objRoupa;
 
     const roupa = document.createElement('div');
     roupa.className = 'roupa-div';
 
-    const image = document.createElement('img');
-    image.src = imagem[0];
-    image.alt = titulo;
-    image.className = 'my-image';
+    const image1 = document.createElement('img');
+    image1.src = imagem1;
+    image1.alt = titulo;
+    image1.className = 'my-image';
+
+    const image2 = document.createElement('img');
+    image2.src = imagem2;
+    image2.alt = titulo;
+    image2.className = 'my-image hidden-img';
+
+    const container = document.createElement('container');
+    container.className = 'image-container' 
+    container.appendChild(image1);
+    container.appendChild(image2);
+
+    image1.addEventListener('mouseover', () => {
+        image1.classList.add('hidden-img');
+        image2.classList.remove('hidden-img');
+        image2.classList.add('visible-img');
+    });
+
+    image1.addEventListener('mouseout', () => {
+        image1.classList.remove('hidden-img');
+        image2.classList.remove('visible-img');
+        image2.classList.add('hidden-img');
+    });
+
+    image2.addEventListener('mouseover', () => {
+        image1.classList.add('hidden-img');
+        image2.classList.remove('hidden-img');
+        image2.classList.add('visible-img');
+    });
+
+    image2.addEventListener('mouseout', () => {
+        image1.classList.remove('hidden-img');
+        image2.classList.remove('visible-img');
+        image2.classList.add('hidden-img');
+    });
+
+    roupa.appendChild(container);
 
     const title = document.createElement('h2');
     title.className = 'texto-roupas';
@@ -84,16 +121,16 @@ function criarRoupa(objRoupa) {
 
 
     // image.onmouseout = () => {
-    //     image.src = imagem[0];
+    //     image.src = imagem1;
     // }
 
     // image.onmouseover = () => {
-    //     image.src = imagem[1];
+    //     image.src = imagem2;
     // }
 
     return {
         roupa,
-        image,
+        image: container,
         title,
         categoria: categoriaNova,
         preco: precoNovo,
