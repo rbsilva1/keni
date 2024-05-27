@@ -1,6 +1,6 @@
 from typing import List, Optional
 from src.models.Product import Product
-from src.db import db
+from src.db.db import db
 
 class ProductsRepository:
     def get_products(self, id: int) -> Optional[Product]:

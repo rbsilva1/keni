@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from routes.home import home
 from routes.products import products
 from routes.admin import admin
-from src.db import db
+from src.db.db import db
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///projeto.db"
@@ -14,7 +14,7 @@ with app.app_context():
 
 @app.errorhandler(404)
 def not_found(e):
-  return render_template('404.html')
+  return render_template('404.html'), 404
 
 app.register_blueprint(home)
 app.register_blueprint(admin, url_prefix="/admin")
