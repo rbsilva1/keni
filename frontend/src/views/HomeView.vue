@@ -104,7 +104,7 @@ export default {
     },
     methods: {
         async listarRoupas() {
-            this.roupas = await (await fetch('/products/')).json();
+            this.roupas = await (await fetch('http://127.0.0.1:5000/products/')).json();
             this.roupas = this.roupas.map(roupa => ({ ...roupa, isHovered: false }));
         },
         toggleMenu(menu) {

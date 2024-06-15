@@ -6,7 +6,7 @@ import { RouterView } from 'vue-router'
 
   <header id="header">
     <div>
-      <img class="img-logo" style="margin-left: 1em;" src="/src/assets/logo.svg" alt="Polo">
+      <img class="img-logo" style="margin-left: 1em;" src="/frontend/src/assets/logo.svg" alt="Polo">
     </div>
     <nav id="header-text">
       <h2 class="text">FEMININO</h2>

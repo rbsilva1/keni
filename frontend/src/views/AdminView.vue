@@ -134,11 +134,11 @@ export default {
     },
     methods: {
         async list() {
-            const response = await fetch('/products');
+            const response = await fetch('http://127.0.0.1:5000/products');
             this.produtos = await response.json();
         },
         async remove(id) {
-            const removed = await fetch(`/products/${id}`, {
+            const removed = await fetch(`http://127.0.0.1:5000/products/${id}`, {
                 method: 'DELETE',
             });
             if (removed.status === 200) {
@@ -159,7 +159,7 @@ export default {
         },
         async add() {
             const imagem = "https://i.ibb.co/khmgBf1/1.jpg";
-            const response = await fetch('/products', {
+            const response = await fetch('http://127.0.0.1:5000/products', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -171,7 +171,7 @@ export default {
             }
         },
         async update() {
-            const response = await fetch(`/products/${this.formEdicao.id}`, {
+            const response = await fetch(`http://127.0.0.1:5000/products/${this.formEdicao.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
