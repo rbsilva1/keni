@@ -1,6 +1,6 @@
 from typing import List, Optional
-from backend.src.models.Product import Product
-from backend.src.db import db
+from src.models.Product import Product
+from src.db import db
 
 class ProductsRepository:
     def get_products(self, id: int) -> Optional[Product]:

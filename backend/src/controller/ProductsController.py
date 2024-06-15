@@ -1,6 +1,6 @@
 from typing import List
-from backend.src.repositories.ProductsRepository import ProductsRepository
-from backend.src.models.Product import Product
+from src.repositories.ProductsRepository import ProductsRepository
+from src.models.Product import Product
 
 class ProductsController:
     repository: ProductsRepository

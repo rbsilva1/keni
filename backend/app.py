@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request
 # from backend.routes.home import home
-from backend.routes.products import products
+from routes.products import products
 # from backend.routes.admin import admin
-from backend.src.db import db
+from src.db import db
 from flask_cors import CORS
 
 app = Flask(__name__)
