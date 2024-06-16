@@ -30,7 +30,7 @@
                     <td>{{ produto.tamanho }}</td>
                     <td>{{ produto.preco }}</td>
                     <td class="d-flex justify-content-around">
-                        <button @click="openModal('edicao', produto.id)" class="btn btn-link p-0" style="font-size: 19px;">
+                        <button @click="openModal(produto.id)" class="btn btn-link p-0" style="font-size: 19px;">
                             <PhPencil class="ph ph-pencil" style="color: #00c3ff;"></PhPencil>
                         </button>
                         <button @click="remove(produto.id)" class="btn btn-link p-0" style="font-size: 19px;">
@@ -69,7 +69,7 @@
                                 <input type="text" class="form-control" v-model="formCadastro.categoria">
                             </div>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-primary">Criar</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Criar</button>
                         </form>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
                                 <input type="text" class="form-control" v-model="formEdicao.categoria">
                             </div>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="submit" class="btn btn-primary">Salvar</button>
+                            <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Salvar</button>
                         </form>
                     </div>
                 </div>
@@ -113,6 +113,8 @@
 </template>
 
 <script>
+import { Modal } from 'bootstrap';
+
 export default {
     data() {
         return {
@@ -145,17 +147,11 @@ export default {
                 this.list();
             }
         },
-        openModal(type, id = null) {
-            if (type === 'cadastro') {
-                this.resetFormCadastro();
-                const modalCadastro = new bootstrap.Modal(document.getElementById('modal-cadastro'));
-                modalCadastro.show();
-            } else if (type === 'edicao' && id) {
-                const produto = this.produtos.find(prod => prod.id === id);
-                this.formEdicao = { ...produto };
-                const modalEdicao = new bootstrap.Modal(document.getElementById('modal-edicao'));
-                modalEdicao.show();
-            }
+        openModal(id) {
+            const produto = this.produtos.find(prod => prod.id === id);
+            this.formEdicao = { ...produto };
+            const modalEdicao = new Modal(document.getElementById('modal-edicao'));
+            modalEdicao.show();
         },
         async add() {
             const tamanhoMaiusculo = this.formCadastro.tamanho.toUpperCase();
@@ -178,6 +174,7 @@ export default {
 
             if (response.status === 201) {
                 this.list();
+                this.resetFormCadastro();
             }
         },
         async update() {
@@ -189,21 +186,11 @@ export default {
                 body: JSON.stringify(this.formEdicao),
             });
             if (response.status === 200) {
-                this.resetFormEdicao();
                 this.list();
             }
         },
         resetFormCadastro() {
             this.formCadastro = {
-                titulo: '',
-                tamanho: '',
-                preco: '',
-                categoria: '',
-            };
-        },
-        resetFormEdicao() {
-            this.formEdicao = {
-                id: null,
                 titulo: '',
                 tamanho: '',
                 preco: '',
