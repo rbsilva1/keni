@@ -26,11 +26,11 @@
                     <div id="tipo" :class="{ 'filter-show': isTipoVisible }">
                         <ul class="list-type list-type-id">
                             <li class="li-type"><button class="botao-tamanho button-type"
-                                    @click="filtrarRoupa('Blusa', $event)"></button>Blusa</li>
+                                    @click="filtrarCategoria('Blusa', $event)"></button>Blusa</li>
                             <li class="li-type"><button class="botao-tamanho button-type"
-                                    @click="filtrarRoupa('Calça', $event)"></button>Calça</li>
+                                    @click="filtrarCategoria('Calça', $event)"></button>Calça</li>
                             <li class="li-type"><button class="botao-tamanho button-type"
-                                    @click="filtrarRoupa('Camisa', $event)"></button>Camisa</li>
+                                    @click="filtrarCategoria('Camisa', $event)"></button>Camisa</li>
                         </ul>
                     </div>
                 </section>
@@ -87,7 +87,9 @@ export default {
             isTipoVisible: false,
             isPrecoVisible: false,
             precoMin: 0,
-            precoMax: 10000
+            precoMax: 10000,
+            isCategoriaVisible: false,
+            categoriasSelecionadas: []
         };
     },
     computed: {
@@ -95,13 +97,14 @@ export default {
             const precoMin = this.precoMin === '' ? 0 : Number(this.precoMin);
             const precoMax = this.precoMax === '' ? 10000 : Number(this.precoMax);
 
-            if (this.filtrosAtivos.length === 0) {
+            if (this.filtrosAtivos.length === 0 && this.categoriasSelecionadas.length === 0) {
                 return this.roupas.filter(roupa => roupa.preco >= precoMin && roupa.preco <= precoMax);
             } else {
                 return this.roupas.filter(roupa => {
-                    const matchesCategoria = this.filtrosAtivos.includes(roupa.categoria);
+                    const matchesTamanho = this.filtrosAtivos.length === 0 || this.filtrosAtivos.some(filtro => roupa.tamanho.includes(filtro));
+                    const matchesCategoria = this.categoriasSelecionadas.length === 0 || this.categoriasSelecionadas.includes(roupa.categoria);
                     const matchesPreco = roupa.preco >= precoMin && roupa.preco <= precoMax;
-                    return matchesCategoria && matchesPreco;
+                    return matchesTamanho && matchesCategoria && matchesPreco;
                 });
             }
         }
@@ -123,18 +126,29 @@ export default {
                 this.isPrecoVisible = !this.isPrecoVisible;
             }
         },
-        filtrarRoupa(categoria, event) {
+        filtrarRoupa(tamanho, event) {
             const button = event.target;
             const isChecked = button.classList.contains('checked');
             if (isChecked) {
                 button.classList.remove('checked');
-                this.filtrosAtivos = this.filtrosAtivos.filter(filtro => filtro !== categoria);
+                this.filtrosAtivos = this.filtrosAtivos.filter(filtro => filtro !== tamanho);
             } else {
                 button.classList.add('checked');
-                this.filtrosAtivos.push(categoria);
+                this.filtrosAtivos.push(tamanho);
             }
         },
+        filtrarCategoria(categoria, event) {
+            const button = event.target;
+            const isChecked = button.classList.contains('checked');
 
+            if (isChecked) {
+                button.classList.remove('checked');
+                this.categoriasSelecionadas = this.categoriasSelecionadas.filter(cat => cat !== categoria);
+            } else {
+                button.classList.add('checked');
+                this.categoriasSelecionadas.push(categoria);
+            }
+        },
         toggleImage(id, isHovered) {
             const roupa = this.roupas.find(roupa => roupa.id === id);
             roupa.isHovered = isHovered;
