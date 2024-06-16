@@ -158,14 +158,24 @@ export default {
             }
         },
         async add() {
-            const imagem = "https://i.ibb.co/khmgBf1/1.jpg";
+            const tamanhoMaiusculo = this.formCadastro.tamanho.toUpperCase();
+            const categoriaCapitalizada = this.formCadastro.categoria.charAt(0).toUpperCase() + this.formCadastro.categoria.slice(1);
+
+            const bodyData = {
+                ...this.formCadastro,
+                tamanho: tamanhoMaiusculo,
+                categoria: categoriaCapitalizada,
+                imagem: "https://i.ibb.co/khmgBf1/1.jpg"
+            };
+
             const response = await fetch('http://127.0.0.1:5000/products/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ...this.formCadastro, imagem }),
+                body: JSON.stringify(bodyData),
             });
+
             if (response.status === 201) {
                 this.list();
             }
