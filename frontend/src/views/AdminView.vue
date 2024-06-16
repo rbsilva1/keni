@@ -30,11 +30,11 @@
                     <td>{{ produto.tamanho }}</td>
                     <td>{{ produto.preco }}</td>
                     <td class="d-flex justify-content-around">
-                        <button @click="openModal('edicao', produto.id)" class="btn btn-link p-0">
-                            <i class="ph ph-pencil" style="color: #00c3ff;"></i>
+                        <button @click="openModal('edicao', produto.id)" class="btn btn-link p-0" style="font-size: 19px;">
+                            <PhPencil class="ph ph-pencil" style="color: #00c3ff;"></PhPencil>
                         </button>
-                        <button @click="remove(produto.id)" class="btn btn-link p-0">
-                            <i class="ph ph-trash" style="color: #ff0000;"></i>
+                        <button @click="remove(produto.id)" class="btn btn-link p-0" style="font-size: 19px;">
+                            <PhTrash class="ph ph-trash" style="color: #ff0000;"></PhTrash>
                         </button>
                     </td>
                 </tr>

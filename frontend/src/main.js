@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // Importa o JS do Bootstrap
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-import { PhMagnifyingGlass, PhShoppingCart, PhUser } from '@phosphor-icons/vue';
+import { PhMagnifyingGlass, PhShoppingCart, PhUser, PhTrash, PhPencil } from '@phosphor-icons/vue';
 
 const app = createApp(App)
 
@@ -18,6 +18,8 @@ const app = createApp(App)
 app.component('PhMagnifyingGlass', PhMagnifyingGlass);
 app.component('PhShoppingCart', PhShoppingCart);
 app.component('PhUser', PhUser);
+app.component('PhTrash', PhTrash)
+app.component('PhPencil', PhPencil)
 
 app.use(router)
 
