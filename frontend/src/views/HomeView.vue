@@ -26,11 +26,11 @@
                     <div id="tipo" :class="{ 'filter-show': isTipoVisible }">
                         <ul class="list-type list-type-id">
                             <li class="li-type"><button class="botao-tamanho button-type"
-                                    @click="toggleChecked($event)"></button>Blusa</li>
+                                    @click="filtrarRoupa('Blusa', $event)"></button>Blusa</li>
                             <li class="li-type"><button class="botao-tamanho button-type"
-                                    @click="toggleChecked($event)"></button>Calça</li>
+                                    @click="filtrarRoupa('Calça', $event)"></button>Calça</li>
                             <li class="li-type"><button class="botao-tamanho button-type"
-                                    @click="toggleChecked($event)"></button>Camisa</li>
+                                    @click="filtrarRoupa('Camisa', $event)"></button>Camisa</li>
                         </ul>
                     </div>
                 </section>
@@ -58,9 +58,9 @@
 
         <div class="roupas">
             <div v-for="roupa in roupasFiltradas" :key="roupa.id" class="roupa-div">
-                <div class="image-container">
-                    <img :src="roupa.imagem1" :alt="roupa.titulo" class="my-image"
-                        @mouseover="toggleImage(roupa.id, true)" @mouseout="toggleImage(roupa.id, false)">
+                <div class="image-container" @mouseover="toggleImage(roupa.id, true)"
+                    @mouseout="toggleImage(roupa.id, false)">
+                    <img :src="roupa.imagem1" :alt="roupa.titulo" class="my-image">
                     <img :src="roupa.imagem2" :alt="roupa.titulo" class="my-image hidden-img"
                         :class="{ 'visible-img': roupa.isHovered, 'hidden-img': !roupa.isHovered }">
                 </div>
@@ -92,11 +92,18 @@ export default {
     },
     computed: {
         roupasFiltradas() {
-            return this.roupas.filter(roupa => {
-                const matchesTamanho = this.filtrosAtivos.length === 0 || this.filtrosAtivos.some(filtro => roupa.tamanho.includes(filtro));
-                const matchesPreco = roupa.preco >= this.precoMin && roupa.preco <= this.precoMax;
-                return matchesTamanho && matchesPreco;
-            });
+            const precoMin = this.precoMin === '' ? 0 : Number(this.precoMin);
+            const precoMax = this.precoMax === '' ? 10000 : Number(this.precoMax);
+
+            if (this.filtrosAtivos.length === 0) {
+                return this.roupas.filter(roupa => roupa.preco >= precoMin && roupa.preco <= precoMax);
+            } else {
+                return this.roupas.filter(roupa => {
+                    const matchesCategoria = this.filtrosAtivos.includes(roupa.categoria);
+                    const matchesPreco = roupa.preco >= precoMin && roupa.preco <= precoMax;
+                    return matchesCategoria && matchesPreco;
+                });
+            }
         }
     },
     mounted() {
@@ -116,17 +123,18 @@ export default {
                 this.isPrecoVisible = !this.isPrecoVisible;
             }
         },
-        filtrarRoupa(tamanho, event) {
+        filtrarRoupa(categoria, event) {
             const button = event.target;
             const isChecked = button.classList.contains('checked');
             if (isChecked) {
                 button.classList.remove('checked');
-                this.filtrosAtivos = this.filtrosAtivos.filter(filtro => filtro !== tamanho);
+                this.filtrosAtivos = this.filtrosAtivos.filter(filtro => filtro !== categoria);
             } else {
                 button.classList.add('checked');
-                this.filtrosAtivos.push(tamanho);
+                this.filtrosAtivos.push(categoria);
             }
         },
+
         toggleImage(id, isHovered) {
             const roupa = this.roupas.find(roupa => roupa.id === id);
             roupa.isHovered = isHovered;
@@ -141,3 +149,25 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+.roupa-div {
+    position: relative;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+.hidden-img {
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.visible-img {
+    opacity: 1;
+}
+</style>

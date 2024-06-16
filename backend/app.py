@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
-# from backend.routes.home import home
 from routes.products import products
-# from backend.routes.admin import admin
 from src.db import db
 from flask_cors import CORS
 
@@ -22,6 +20,4 @@ with app.app_context():
 def not_found(e):
   return render_template('404.html')
 
-# app.register_blueprint(home)
-# app.register_blueprint(admin, url_prefix="/admin")
 app.register_blueprint(products, url_prefix="/products")
