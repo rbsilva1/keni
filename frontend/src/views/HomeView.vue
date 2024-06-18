@@ -78,6 +78,8 @@
 </template>
 
 <script>
+import { list } from '@/services/backend';
+
 export default {
     data() {
         return {
@@ -114,7 +116,7 @@ export default {
     },
     methods: {
         async listarRoupas() {
-            this.roupas = await (await fetch('http://127.0.0.1:5000/products/')).json();
+            this.roupas = await list();
             this.roupas = this.roupas.map(roupa => ({ ...roupa, isHovered: false }));
         },
         toggleMenu(menu) {

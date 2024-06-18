@@ -114,6 +114,7 @@
 
 <script>
 import { Modal } from 'bootstrap';
+import { list, add, remove, update } from '@/services/backend';
 
 export default {
     data() {
@@ -136,14 +137,11 @@ export default {
     },
     methods: {
         async list() {
-            const response = await fetch('http://127.0.0.1:5000/products');
-            this.produtos = await response.json();
+            this.produtos = await list();
         },
         async remove(id) {
-            const removed = await fetch(`http://127.0.0.1:5000/products/${id}`, {
-                method: 'DELETE',
-            });
-            if (removed.status === 200) {
+            const removed = await remove(id);
+            if (removed) {
                 this.list();
             }
         },
@@ -154,38 +152,15 @@ export default {
             modalEdicao.show();
         },
         async add() {
-            const tamanhoMaiusculo = this.formCadastro.tamanho.toUpperCase();
-            const categoriaCapitalizada = this.formCadastro.categoria.charAt(0).toUpperCase() + this.formCadastro.categoria.slice(1);
-
-            const bodyData = {
-                ...this.formCadastro,
-                tamanho: tamanhoMaiusculo,
-                categoria: categoriaCapitalizada,
-                imagem: "https://i.ibb.co/khmgBf1/1.jpg"
-            };
-
-            const response = await fetch('http://127.0.0.1:5000/products/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(bodyData),
-            });
-
-            if (response.status === 201) {
+            const added = await add(this.formCadastro);
+            if (added) {
                 this.list();
                 this.resetFormCadastro();
             }
         },
         async update() {
-            const response = await fetch(`http://127.0.0.1:5000/products/${this.formEdicao.id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(this.formEdicao),
-            });
-            if (response.status === 200) {
+            const updated = await update(this.formEdicao);
+            if (updated) {
                 this.list();
             }
         },
