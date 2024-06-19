@@ -57,7 +57,18 @@
         </div>
 
         <div class="roupas">
-            <div v-for="roupa in roupasFiltradas" :key="roupa.id" class="roupa-div">
+            <Roupas 
+                v-for="(roupa, index) of roupasFiltradas"
+                :key="roupa-`${index}`"
+                :imagem1="roupa.imagem1"
+                :imagem2="roupa.imagem2"
+                :titulo="roupa.titulo"
+                :categoria="roupa.categoria"
+                :preco="roupa.preco"
+                :tamanho="roupa.tamanho"
+                :isHovered="roupa.isHovered"
+            />
+            <!-- <div  :key="roupa.id" class="roupa-div">
                 <div class="image-container" @mouseover="toggleImage(roupa.id, true)"
                     @mouseout="toggleImage(roupa.id, false)">
                     <img :src="roupa.imagem1" :alt="roupa.titulo" class="my-image">
@@ -72,15 +83,19 @@
                     <button class="bt-menu-hover" @click.prevent="adicionarAoCarrinho(roupa)">Adicionar ao
                         Carrinho</button>
                 </form>
-            </div>
+            </div> -->
         </div>
     </main>
 </template>
 
 <script>
 import { list } from '@/services/backend';
+import Roupas from '@/components/Roupas.vue';
 
 export default {
+    components: {
+        Roupas
+    },
     data() {
         return {
             roupas: [],
